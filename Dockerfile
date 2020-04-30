@@ -1,7 +1,6 @@
-FROM ubuntu:19.10 AS base
+FROM ubuntu:19.10
 
 USER root
-WORKDIR /build
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -17,23 +16,16 @@ RUN apt-get update -y \
     libocamlgraph-ocaml-dev \
     libzarith-ocaml-dev \
     build-essential \
+    libfindlib-ocaml \
+    libocamlgraph-ocaml-dev \
+    libzarith-ocaml \
+    libyojson-ocaml-dev \
     alt-ergo \
     curl \
     frama-c-base \
  && rm -rf /var/lib/apt/lists/* 
  
-FROM ubuntu:19.10
-
-COPY --from=base /usr/local/ /usr/local/
-
-RUN apt-get update -y \
- && apt-get install -y \
-    libfindlib-ocaml \
-    libocamlgraph-ocaml-dev \
-    libzarith-ocaml \
-    libyojson-ocaml-dev \
- && rm -rf /var/lib/apt/lists/* \
- && groupadd -r frama-c \
+RUN groupadd -r frama-c \
  && useradd --no-log-init -r -g frama-c frama-c
 
 USER frama-c
