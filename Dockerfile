@@ -19,13 +19,9 @@ RUN apt-get update -y \
     build-essential \
     alt-ergo \
     curl \
- && rm -rf /var/lib/apt/lists/* \
- && git clone --single-branch https://github.com/Frama-C/Frama-C-snapshot.git . \
- && git checkout -b tags/20.0 \
- && ./configure \
- && make \
- && make install
-
+    frama-c-base \
+ && rm -rf /var/lib/apt/lists/* 
+ 
 FROM ubuntu:19.10
 
 COPY --from=base /usr/local/ /usr/local/
