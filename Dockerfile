@@ -28,6 +28,13 @@ RUN apt-get update -y \
 RUN groupadd -r frama-c \
  && useradd --no-log-init -r -g frama-c frama-c
 
+WORKDIR /build
+RUN curl "http://www.lsv.fr/~gastin/ltl2ba/ltl2ba-1.2.tar.gz" --output ltl2ba-1.2.tar.gz \
+  && tar xvfz ltl2ba-1.2.tar.gz \
+  && cd ltl2ba-1.2 \
+  && make \
+  && mv ltl2ba /usr/local/bin
+
 USER frama-c
 WORKDIR /src
 ENTRYPOINT ["frama-c"]
