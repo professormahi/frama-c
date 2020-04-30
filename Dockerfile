@@ -17,6 +17,7 @@ RUN apt-get update -y \
     libocamlgraph-ocaml-dev \
     libzarith-ocaml-dev \
     build-essential \
+    alt-ergo \
  && rm -rf /var/lib/apt/lists/* \
  && git clone --single-branch https://github.com/Frama-C/Frama-C-snapshot.git . \
  && git checkout -b tags/20.0 \
